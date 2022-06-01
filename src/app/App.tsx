@@ -1,11 +1,12 @@
 import React, { Suspense } from 'react';
 
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { PageLogin } from '@/app/auth/PageLogin';
 import { PageLogout } from '@/app/auth/PageLogout';
 import { Layout, Loader } from '@/app/layout';
+import { BrowserRouter } from '@/app/router/Router';
 import {
   AdminRouteGuard,
   AuthenticatedRouteGuard,

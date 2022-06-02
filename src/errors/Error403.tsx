@@ -2,11 +2,14 @@ import React from 'react';
 
 import { Button, Center, Heading, Stack, Text } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+
+import { useGoBack } from '@/app/router';
 
 export const Error403 = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+
+  const goBack = useGoBack('/');
+
   return (
     <Center flex="1" p="8">
       <Stack align="center" textAlign="center">
@@ -14,7 +17,7 @@ export const Error403 = () => {
         <Text color="gray.600" _dark={{ color: 'gray.400' }}>
           {t('errors:403.description')}
         </Text>
-        <Button onClick={() => navigate(-1)}>
+        <Button onClick={() => goBack()}>
           {t('errors:403.actions.goBack')}
         </Button>
       </Stack>

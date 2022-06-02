@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { Formiz, useForm } from '@formiz/core';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { useUser, useUserUpdate } from '@/app/admin/users/users.service';
 import {
@@ -22,6 +22,7 @@ import {
   PageContent,
   PageTopBar,
 } from '@/app/layout';
+import { useGoBack } from '@/app/router';
 import { useToastError, useToastSuccess } from '@/components';
 import { Error404 } from '@/errors';
 
@@ -32,7 +33,9 @@ export const PageUserUpdate = () => {
   const { t } = useTranslation();
 
   const { login } = useParams();
-  const navigate = useNavigate();
+
+  const goBack = useGoBack('/admin/users');
+
   const {
     user,
     isLoading: userIsLoading,
@@ -71,7 +74,7 @@ export const PageUserUpdate = () => {
       toastSuccess({
         title: t('users:update.feedbacks.updateSuccess.title'),
       });
-      navigate(-1);
+      goBack();
     },
   });
   const submitEditUser = (values: any) => {
@@ -84,7 +87,7 @@ export const PageUserUpdate = () => {
 
   return (
     <Page containerSize="md" isFocusMode>
-      <PageTopBar showBack onBack={() => navigate(-1)}>
+      <PageTopBar showBack onBack={() => goBack()}>
         <HStack spacing="4">
           <Box flex="1">
             {userIsLoading || userIsError ? (
@@ -124,9 +127,7 @@ export const PageUserUpdate = () => {
             </PageContent>
             <PageBottomBar>
               <ButtonGroup justifyContent="space-between">
-                <Button onClick={() => navigate(-1)}>
-                  {t('actions.cancel')}
-                </Button>
+                <Button onClick={() => goBack()}>{t('actions.cancel')}</Button>
                 <Button
                   type="submit"
                   variant="@primary"

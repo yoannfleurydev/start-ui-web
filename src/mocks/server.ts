@@ -38,6 +38,9 @@ export const mockServer = () => {
 
       this.namespace = '/';
       this.passthrough();
+
+      // Enable image upload to cloudinary, even when developing with mocks
+      this.passthrough('https://api.cloudinary.com/**');
     },
   });
 };
